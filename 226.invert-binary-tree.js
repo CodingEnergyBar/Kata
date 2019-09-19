@@ -14,11 +14,17 @@
  * @param {TreeNode} root
  * @return {TreeNode}
  */
+
+// lintcode 175
 var invertTree = function(root) {
-	// nice one
-	if (root == null) return null;
-	let temp = root.left;
-	root.left = invertTree(root.right);
-	root.right = invertTree(temp);
+	//traverse dfs
+	if (!root) return null;
+
+	let leftTree = invertTree(root.left);
+	let rightTree = invertTree(root.right);
+
+	root.left = rightTree;
+	root.right = leftTree;
+
 	return root;
 };

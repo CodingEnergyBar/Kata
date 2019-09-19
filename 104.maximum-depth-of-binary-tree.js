@@ -17,12 +17,8 @@
 // import Tree from './Tree';
 
 var maxDepth = function(root) {
-	if (root === null || root === undefined) return 0;
-
-	// let left = maxDepth(root.left);
-	// let right = maxDepth(root.right);
-
-	// return Math.max(left, right);
-	return Math.max(maxDepth(root.left), maxDepth(root.right))+1;
+	if (!root) return 0;
+	let left = maxDepth(root.left);
+	let right = maxDepth(root.right);
+	return Math.max(left, right) + 1;
 };
-
