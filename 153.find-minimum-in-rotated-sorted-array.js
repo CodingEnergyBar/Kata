@@ -10,7 +10,6 @@
 var findMin = function(nums) {
 	// smallest now is nums[end];
 	// keep the feature for 拐点
-
 	let l = 0,
 		r = nums.length - 1;
 
