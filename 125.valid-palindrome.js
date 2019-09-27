@@ -15,7 +15,6 @@ var isPalindrome = function(s) {
 	let l = 0,
 		r = sClean.length - 1;
 
-	let mid = Math.floor((l + r) / 2);
 	// console.log(sClean.slice(mid));
 	// let behind = sClean.slice(mid);
 	// let front = sClean.slice(0, mid);
@@ -26,7 +25,8 @@ var isPalindrome = function(s) {
 		if (sClean.charAt(l) === sClean.charAt(r)) {
 			l++;
 			r--;
-		} else return false;
+		}
+		else return false;
 	}
 	return true;
 };
