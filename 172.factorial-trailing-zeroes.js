@@ -62,15 +62,17 @@ const factor5 = (num) => {
 // };
 
 var trailingZeroes = function(n) {
-	let res5 = 0;
 
-	// while (n > 0) {
-	// 	if (n % 5 == 0) res5++;
-	// 	n;
-	// }
+	let sum = 0;
+	while(n){
+		n = Math.floor(n/5);
+		sum += n;
+	
+		
+	}
 
-	// find the factor 5
-	return factor5(n);
+	console.log(sum);
+	return sum;
 };
 
 // trailingZeroes(10);
