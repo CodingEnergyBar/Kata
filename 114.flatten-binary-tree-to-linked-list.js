@@ -18,32 +18,37 @@
 // testcase: [1,2,null,3]
 
 var flatten = function(root) {
-	console.log('\n');
+	// take care of passing reference
 	helper(root);
 
-	function helper(root) {
-		// return the end of the left
-		if (root === null) return null;
-		if (root.left === null && root.right === null) return root;
+	function helper(root){
+		if(root === null)
+			return null;
+
+		// leaf
+		if(root.left === null && root.right === null){
+			return root;
+		}
+
 		let leftEnd = helper(root.left);
 		let rightEnd = helper(root.right);
 
-		let tmp = root.right;
-		root.right = root.left;
-		root.left = null;
 
-		if (leftEnd) {
-			// left is not null
+		if(leftEnd !== null){
+			let tmp = root.right;
+			root.right = root.left;
 			leftEnd.right = tmp;
+			root.left = null;
+			if(rightEnd){
+				return rightEnd;
+			}else{
+				return leftEnd;
+			}
+		}else{
+			return rightEnd;
 		}
-		else {
-			// left is null
-			root.right = tmp;
-		}
-		// console.log('root', root);
-		// console.log('rightEnd', rightEnd);
-		if (rightEnd) return rightEnd;
-		else return leftEnd;
-		// return rightEnd;
+
 	}
+
+
 };
