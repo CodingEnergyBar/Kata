@@ -36,10 +36,13 @@ var numSubarrayProductLessThanK = function(nums, k) {
             curPro /= nums[i];
             i++;
         }
-        //???
+         //    Each step introduces x !!!new subarrays, where x is the size of the current window (j + 1 - i);
         res += j-i+1;
         j++;
     }
+    // 与 break 的方法相反
+
+    // for(i){for j break}
     return res;
     
 };
