@@ -74,8 +74,33 @@
  * @param {string[]} targets
  * @return {string}
  */
-var findReplaceString = function(S, indexes, sources, targets) {
-    
+var findReplaceString = function (S, indexes, sources, targets) {
+    let arr = S.split("");
+   
+    for(let i=0; i<sources.length;i++){
+        
+        if(match(S, indexes[i], sources[i])){
+            
+            for(let j=indexes[i]; j<indexes[i] + sources[i].length;j++){
+                arr[j] = "";
+            }
+            // console.log("arr", arr);
+            arr[indexes[i]] = targets[i];
+            // console.log("arr", arr);
+        }
+    }
+    return arr.join("");
+    function match(s, start, pattern){
+       
+
+        for(let i=0; i<pattern.length;i++){
+        //  console.log("s[start+i]", s[start+i]);
+        //  console.log("pattern[i]", pattern[i]);
+            if(s[start+i] !== pattern[i])
+                return false;
+        }
+        // console.log("mateched");
+        return true;
+    }
 };
 // @lc code=end
-
