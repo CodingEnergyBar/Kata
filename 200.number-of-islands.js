@@ -17,7 +17,7 @@ var numIslands = function(grid) {
 	// console.log(grid);
 	// let visited = new Array(grid.length).fill(new Array(grid[0].length).fill(false));
 
-	if (grid.length === 0) {
+	if (grid.length === 0) {um
 		return 0;
 	}
 	const col = grid[0].length;
