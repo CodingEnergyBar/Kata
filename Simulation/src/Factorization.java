@@ -44,7 +44,11 @@ public class Factorization {
 //            helper(result, item, 1, n);
 //            item.remove(item.size() - 1);
 //        }
-     /**
+
+    public Factorization() {
+    }
+
+    /**
          * @param n: An integer
          * @return: a list of combination
          */
