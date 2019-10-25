@@ -7,10 +7,11 @@
  * @param {string} s
  * @return {boolean}
  */
-var isPalindrome = function(s) {
+var isPalindrome = function (s) {
 	// let sArray = s.replace(',', '').replace(' ', '').toLowerCase().split('');
 	// except for
-	let sClean = s.toLowerCase().replace(/[^a-z0-9]/g, '');
+	// it is easier to change to lowercase first... come on...
+	let sClean = s.toLowerCase().replace(/[^a-z0-9]/g, "");
 	console.log(sClean);
 	let l = 0,
 		r = sClean.length - 1;
@@ -31,4 +32,4 @@ var isPalindrome = function(s) {
 	return true;
 };
 
-isPalindrome('A man, a plan, 9a canal: Panama');
+isPalindrome("A man, a plan, 9a canal: Panama");
