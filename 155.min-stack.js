@@ -47,7 +47,8 @@
  * initialize your data structure here.
  */
 var MinStack = function() {
-    
+     this.content = [];
+     this.mins = [];
 };
 
 /** 
@@ -55,6 +56,18 @@ var MinStack = function() {
  * @return {void}
  */
 MinStack.prototype.push = function(x) {
+    this.content.push(x);
+    if(!this.mins.length){
+        this.mins.push(x);
+    }else{
+        if(this.mins[this.mins.length - 1] > x){
+            this.mins.push(x);
+        }else{
+            this.mins.push(this.mins[this.mins.length - 1]);
+        }
+    }
+    
+
     
 };
 
@@ -62,13 +75,18 @@ MinStack.prototype.push = function(x) {
  * @return {void}
  */
 MinStack.prototype.pop = function() {
-    
+    this.content.pop();
+    this.mins.pop();
 };
 
 /**
  * @return {number}
  */
 MinStack.prototype.top = function() {
+    if(this.content.length)
+        return this.content[this.content.length - 1];
+    else
+        return null;
     
 };
 
@@ -76,7 +94,7 @@ MinStack.prototype.top = function() {
  * @return {number}
  */
 MinStack.prototype.getMin = function() {
-    
+    return this.mins[this.mins.length - 1];
 };
 
 /** 

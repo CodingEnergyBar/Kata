@@ -38,6 +38,7 @@ function isCommonSeq (s1, s2) {
 		if (s2[i] == s1[index]) {
 			index++;
 		}
+
 		if (index == s1.length) {
 			return true;
 		}
