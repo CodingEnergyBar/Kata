@@ -9,11 +9,8 @@
  * @return {number[]}
  */
 
- // two sum is sorted is different 
-var twoSum = function(nums, target) {
-    let i=0, j=0;
-    
-
-    
+// two sum is sorted is different
+var twoSum = function (nums, target) {
+	let i = 0,
+		j = 0;
 };
-

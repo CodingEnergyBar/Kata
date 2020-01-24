@@ -43,44 +43,40 @@
  * @param {ListNode} l2
  * @return {ListNode}
  */
-var addTwoNumbers = function(l1, l2) {
-    const res = new ListNode(0);
+var addTwoNumbers = function (l1, l2) {
+	const res = new ListNode(0);
 
-    let p = res;
-    let carry = 0;
-    while (l1 && l2){
-        let cur = l1.val+ l2.val + carry;
-        carry = Math.floor(cur / 10);
-        cur  =  cur % 10;
+	let p = res;
+	let carry = 0;
+	while (l1 && l2) {
+		let cur = l1.val + l2.val + carry;
+		carry = Math.floor(cur / 10);
+		cur = cur % 10;
 
-        p.next = new ListNode(cur);
-        p = p.next;
-        l1 = l1.next;
-        l2 = l2.next;
-    }
-    if(l1){
-        connect(l1);
-    }
-    if(l2){
-        connect(l2);
-    }
-    
-    if(carry)
-        p.next = new ListNode(carry);
-    return res.next;
+		p.next = new ListNode(cur);
+		p = p.next;
+		l1 = l1.next;
+		l2 = l2.next;
+	}
+	if (l1) {
+		connect(l1);
+	}
+	if (l2) {
+		connect(l2);
+	}
 
-    function connect(l){
-        while(l){
-            let cur = l.val + carry;
-            carry = Math.floor(cur / 10);
-            cur = cur % 10;
-            p.next = new ListNode(cur);
-            l = l.next;
-            p = p.next;
-        }
-    }
-    
-    
+	if (carry) p.next = new ListNode(carry);
+	return res.next;
+
+	function connect (l) {
+		while (l) {
+			let cur = l.val + carry;
+			carry = Math.floor(cur / 10);
+			cur = cur % 10;
+			p.next = new ListNode(cur);
+			l = l.next;
+			p = p.next;
+		}
+	}
 };
 // @lc code=end
-

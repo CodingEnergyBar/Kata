@@ -9,7 +9,7 @@
  * @param {number} n
  * @return {string}
  */
-var intToRoman = function(n) {
+var intToRoman = function (n) {
 	const nums = [ 1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1 ];
 	const symbols = [ 'M', 'CM', 'D', 'CD', 'C', 'XC', 'L', 'XL', 'X', 'IX', 'V', 'IV', 'I' ];
 	// for javascript need to be very careful about divide /
