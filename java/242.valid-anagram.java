@@ -2,71 +2,34 @@
  * @lc app=leetcode id=242 lang=java
  *
  * [242] Valid Anagram
- *
- * https://leetcode.com/problems/valid-anagram/description/
- *
- * algorithms
- * Easy (53.71%)
- * Likes:    878
- * Dislikes: 117
- * Total Accepted:    407.6K
- * Total Submissions: 757.5K
- * Testcase Example:  '"anagram"\n"nagaram"'
- *
- * Given two strings s and t , write a function to determine if t is an anagram
- * of s.
- * 
- * Example 1:
- * 
- * 
- * Input: s = "anagram", t = "nagaram"
- * Output: true
- * 
- * 
- * Example 2:
- * 
- * 
- * Input: s = "rat", t = "car"
- * Output: false
- * 
- * 
- * Note:
- * You may assume the string contains only lowercase alphabets.
- * 
- * Follow up:
- * What if the inputs contain unicode characters? How would you adapt your
- * solution to such case?
- * 
  */
 
 // @lc code=start
-public class Solution {
-    /**
-     * @param s: The first string
-     * @param t: The second string
-     * @return: true or false
-     */
+class Solution {
     public boolean isAnagram(String s, String t) {
-        // write your code here
-        // corner case:
-        if (s == null || t == null) {
+        if(s.length() != t.length())
             return false;
+        int[] freqs = getfreq(s);
+        int[] freqt = getfreq(t);
+        return isEqual(freqs, freqt);
+        
+    }
+    int[] getfreq(String s){
+        int[] res = new int [256];
+        for(char c: s.toCharArray()){
+            res[c]++;
         }
-
-        // it is easier to implement
-        int[] sHash = new int[256];
-        int[] tHash = new int[256];
-
-        for (char c : s.toCharArray()) {
-            sHash[c]++;
+        return res;
+    }
+    boolean isEqual(int []a, int[] b){
+        assert(a.length == 256);
+        assert(b.length == 256);
+        for(int i=0; i<256;i++){
+            if(a[i] != b[i])
+                return false;
         }
-        for (char c : t.toCharArray()) {
-            tHash[c]++;
-        }
-
-        // sHash array equal 
-        return Arrays.equals(sHash, tHash);
-
+        return true;
     }
 }
 // @lc code=end
+
