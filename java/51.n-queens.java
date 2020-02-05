@@ -6,10 +6,13 @@
 
 // @lc code=start
 class Solution {
-    boolean[] col;List<List<String>>
+    boolean[] col;
+    List<ArrayList<String>> res;xx  
 
     public List<List<String>> solveNQueens(int n) {
-        if(n==0)
+        res = new ArrayList<ArrayList<String>>();
+
+        if (n == 0)
             return null;
 
     }
