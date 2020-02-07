@@ -7,38 +7,26 @@
 // @lc code=start
 class Solution {
     public int maxArea(int[] height) {
-        int i = 0, j = height.length - 1;
-        System.out.println("i " + i);
-        System.out.println("j " + j);
-        int max = Integer.MIN_VALUE;
-        while (i < j) {
-            System.out.println("max " + max);
-            max = Math.max(max, getCurrentArea(i, j, height));
-            if (height[i] <= height[j]) {
-                int cur = height[i];
-                while (height[i] <= cur && i < j)
-                    i++;
-            } else {
-                int cur = height[j];
-                while (height[j] <= cur && i < j)
-                    j--;
+        if(height == null && height.length = 0)
+            return 0;
+       
+        int i=0, j=height.length-1;
+        int res = getArea(height, i, j);
+        while(i < j){
+            if(height[i] > height[j]){
+                j--;
+            }else{// height[i] <= height[j] 
+                i++;
             }
-            System.out.println("i " + i);
-            System.out.println("j " + j);
-
+            res =  Math.max(res, getArea(height, i, j));
         }
-        return max;
-    }
+        return res;
 
-    int getCurrentArea(int i, int j, int[] height) {
+    }
+    int getArea(int[] height, int i, int j){
         int h = Math.min(height[i], height[j]);
-        return Math.abs(j - i) * h;
-    }
-
-    public static void main(String[] args) {
-        int[] test = new int[] { 1, 8, 6, 2, 5, 4, 8, 3, 7 };
-        System.out.println("test " + test);
-        System.out.println(new Solution().maxArea(test));
+        return h * Math.abs(j-i);
     }
 }
 // @lc code=end
+

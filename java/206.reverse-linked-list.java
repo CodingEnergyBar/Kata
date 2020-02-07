@@ -6,21 +6,29 @@
 
 // @lc code=start
 /**
- * Definition for singly-linked list. public class ListNode { int val; ListNode
- * next; ListNode(int x) { val = x; } }
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
  */
 class Solution {
     public ListNode reverseList(ListNode head) {
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
 
-        ListNode pre = null, cur = head, tmp;
-        while (cur != null) {
-            tmp = cur.next;
-            cur.next = pre;
-
+        ListNode pre = null, cur = head;
+        while(cur != null){
+            ListNode tmp = cur.next;
+            cur.next = pre; 
+            
             pre = cur;
-            cur = tmp;
+            cur= tmp;
         }
         return pre;
+        
     }
 }
 // @lc code=end
+
