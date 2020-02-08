@@ -35,10 +35,17 @@
 // @lc code=start
 class Solution {
     public int firstUniqChar(String s) {
-        int[] charToCnt = new int[256];
-        for(cha)
-        
+        int[] hash = new int[256];
+        int i = s.length() - 1;
+        for (; i >= 0; i--) {
+            char cur = s.charAt(i);
+            if (hash[cur] == 0)
+                hash[cur] = 1;
+            else
+                break;
+
+        }
+        return i;
     }
 }
 // @lc code=end
-

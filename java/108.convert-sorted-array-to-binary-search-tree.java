@@ -6,26 +6,31 @@
 
 // @lc code=start
 /**
- * Definition for a binary tree node. public class TreeNode { int val; TreeNode
- * left; TreeNode right; TreeNode(int x) { val = x; } }
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
  */
 class Solution {
-    TreeNode buildTreeNode(int[] nums, int start, int end) {
-        if (start > end)
-            return null;
-        int mid = (start + end) / 2;
-        TreeNode cur = new TreeNode(nums[mid]);
-        cur.left = buildTreeNode(nums, start, mid - 1);
-        cur.right = buildTreeNode(nums, mid + 1, end);
-        return cur;
-    }
-
     public TreeNode sortedArrayToBST(int[] nums) {
-        if (nums == null || nums.length == 0) {
+        
+        return buildTree(nums, 0, nums.length-1);
+        
+    }
+    //[start..end]
+    TreeNode buildTree(int[] nums, int start, int end){
+        if(start > end){
             return null;
         }
-        return buildTreeNode(nums, 0, nums.length - 1);
-
+        int mid = (start + end)/2;
+        TreeNode root = new TreeNode(nums[mid]);
+        root.left =  buildTree(nums, start, mid-1);
+        root.right =  buildTree(nums, mid+1, end);
+        return root;
     }
 }
 // @lc code=end
+
