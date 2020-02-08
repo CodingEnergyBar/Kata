@@ -14,7 +14,7 @@ class Solution {
         res.add(new ArrayList<Integer>());
 
         // for(int )
-        // [0...
+        // [0...i]
 
         for (int i = 0; i < nums.length; i++) {
             int size = res.size();
