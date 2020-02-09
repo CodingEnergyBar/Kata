@@ -7,24 +7,19 @@
 // @lc code=start
 class Solution {
     public boolean isAnagram(String s, String t) {
-        if(s.length() != t.length())
-            return false;
-        int[] freqs = getfreq(s);
-        int[] freqt = getfreq(t);
-        return isEqual(freqs, freqt);
+       
+        return isEqual(getFreq(s), getFreq(t));
         
     }
-    int[] getfreq(String s){
-        int[] res = new int [256];
-        for(char c: s.toCharArray()){
-            res[c]++;
+    int[] getFreq(String s){
+        int[] res = new int[256];
+        for(char a: s.toCharArray()){
+            res[a]++;
         }
         return res;
     }
-    boolean isEqual(int []a, int[] b){
-        assert(a.length == 256);
-        assert(b.length == 256);
-        for(int i=0; i<256;i++){
+    boolean isEqual(int[] a, int[] b){
+        for(int i=0; i<256; i++){
             if(a[i] != b[i])
                 return false;
         }
