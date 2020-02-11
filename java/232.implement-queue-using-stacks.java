@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 /*
  * @lc app=leetcode id=232 lang=java
  *
@@ -12,8 +14,8 @@ class MyQueue {
 
     /** Initialize your data structure here. */
     public MyQueue() {
-        mStack = new Stack<Integer>();
-        hStack = new Stack<Integer>();
+        mStack = new Stack<>();
+        hStack = new Stack<>();
 
     }
 
@@ -25,41 +27,31 @@ class MyQueue {
 
     /** Removes the element from in front of queue and returns that element. */
     public int pop() {
-        while (!mStack.isEmpty()) {
-            hStack.push(mStack.pop());
-        }
-        Integer res = hStack.pop();
-        while (!hStack.isEmpty()) {
-            mStack.push(hStack.pop());
-
-        }
-        return res.intValue();
+        peek();
+        return hStack.pop();
 
     }
 
     /** Get the front element. */
     public int peek() {
+        if (!hStack.isEmpty())
+            return hStack.peek();
         while (!mStack.isEmpty()) {
             hStack.push(mStack.pop());
         }
-        Integer res = hStack.peek();
-        while (!hStack.isEmpty()) {
-            mStack.push(hStack.pop());
-
-        }
-        return res.intValue();
+        return hStack.peek();
 
     }
 
     /** Returns whether the queue is empty. */
     public boolean empty() {
-        return mStack.isEmpty();
+        return hStack.isEmpty() && mStack.isEmpty();
 
     }
     // 1 2 push 3 pop push4 push5 pop pop pop
     // queue 123
     // 321
-    // 12 3  12
+    // 12 3 12
     // 45
     // 12
     // 54

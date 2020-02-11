@@ -36,16 +36,17 @@
 class Solution {
     public int firstUniqChar(String s) {
         int[] hash = new int[256];
-        int i = s.length() - 1;
-        for (; i >= 0; i--) {
-            char cur = s.charAt(i);
-            if (hash[cur] == 0)
-                hash[cur] = 1;
-            else
-                break;
 
+        for (int i = 0; i < s.length(); i++) {
+            int ch = s.charAt(i);
+            hash[ch] += 1;
         }
-        return i;
+        for (int i = 0; i < s.length(); i++) {
+            if (hash[s.charAt(i)] == 1)
+                return i;
+        }
+        return -1;
+
     }
 }
 // @lc code=end

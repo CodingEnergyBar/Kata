@@ -8,33 +8,30 @@
 class Solution {
     public void rotate(int[][] matrix) {
         // 一层一层的来
-        int len = matrix.len;
-        for (int l = len; l > 0; l -= 2) {
-            // left up corner x=y=len-l
-            rotateLayer(len - l, len, matrix);
 
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0)
+            return;
+        assert (matrix.length == matrix[0].length);
+        int len = matrix.length;
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < i; j++) {
+                int tmp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = tmp;
+            }
         }
+        for (int i = 0; i < matrix.length; i++) {
 
-    }
-
-    void rotateLayer(int start, int len, int[][] matrix) {
-        // 对每一个元素进行交换
-        for (int i = 0; i < len; i++) {
-            // 每个元素 每圈上面是起始点
-            int x = start + i, y = start;
-
-            int tmp = matrix[x][y];
-
-            for (int j = 0; j < len; j++) {
-                // int ny = (x + len - 1) % len;
-                // int nx = y;
-                // int tmp = matrix[x][y];
-                int py = x;
-                int px = (x - len + 1) % len;
-
+            for (int j = 0; j < len / 2; j++) {
+                // !!
+                int j2 = len - j - 1;
+                int tmp = matrix[i][j2];
+                matrix[i][j2] = matrix[i][j];
+                matrix[i][j] = tmp;
             }
         }
 
     }
+
 }
 // @lc code=end
