@@ -7,22 +7,16 @@
 // @lc code=start
 class Solution {
     public boolean isPalindrome(String s) {
-        // char[] arr = s.replaceAll("\\s|,|:", "").toLowerCase().toCharArray();
-        char[] arr = s.replaceAll("[^A-Za-z0-9]", "").toLowerCase().toCharArray();
-        int start = 0, end = arr.length - 1;
-        // while (start < end && arr[start++] == arr[end--]) 不行
-        while (start < end && arr[start] == arr[end]) {
-            start++;
-            end--;
-            // System.out.println(start + " " + end);
+        String t = s.replaceAll("[^a-zA-Z0-9]","").toLowerCase();
+        char[] arr = t.toCharArray();
+        int len =  arr.length;
+        for(int i=0; i<len/2;i++){
+            if(arr[i] != arr[len-i-1]){
+                return false;
+            }
         }
-
-        // System.out.println(Arrays.toString(arr));
-        // System.out.println(start + " " + end);
-        if (start < end)
-            return false;
         return true;
-
     }
 }
 // @lc code=end
+
