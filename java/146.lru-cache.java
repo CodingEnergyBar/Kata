@@ -5,58 +5,95 @@
  */
 
 // @lc code=start
-
 class LRUCache {
-
-class DLinkedNode {
-  int key;
-  int value;
-  DLinkedNode pre;
-  DLinkedNode post;
-}
-    private void addNode(DLinkedNode node) {
-        
-    node.pre = head;
-    node.post = head.post;
-
-    head.post.pre = node;
-    head.post = node;
+    class Node{
+        Integer key;
+        Integer val;
+        Node next;
+        Node prev;
+        Node(int key, int value){
+          this.key = key;
+          this.val = value;
+        }
+        Node(){
+          this.key = null;
+          this.val = null;
+        }
     }
-/**
- * Move certain node in between to the head.
- */
-private void moveToHead(DLinkedNode node){
-  this.removeNode(node);
-  this.addNode(node);
-}
-// pop the current tail. 
-private DLinkedNode popTail(){
-  DLinkedNode res = tail.pre;
-  this.removeNode(res);
-  return res;
-}
-    /**
- * Remove an existing node from the linked list.
- */
-private void removeNode(DLinkedNode node){
-  DLinkedNode pre = node.pre;
-  DLinkedNode post = node.post;
+    int size;
+    int capacity;
+    Map<Integer, Node> hash;
+    Node dummyHead;
+    Node tail;
 
-  pre.post = post;
-  post.pre = pre;
-}
-
-    
     public LRUCache(int capacity) {
+      this.hash = new HashMap<Integer, Node>();
+      this.size = 0;
+      this.capacity= capacity;
+      this.dummyHead= new Node();
+      this.tail = new Node();
+      dummyHead.next = tail;
+      tail.prev = dummyHead;
         
     }
     
     public int get(int key) {
+        if(hash.containsKey(key)){
+            Node cur = hash.get(key);
+            moveNodeToHead(cur);
+            return cur.val;
+        }else{
+          return -1;
+        }
         
     }
     
     public void put(int key, int value) {
+
+       if(hash.containsKey(key)){
+          Node node =hash.get(key);
+          node.val = value;
+          moveNodeToHead(node);
+       }else{
+         Node node = new Node(key, value);
+          hash.put(key, node);
+         if(size < capacity){
+           
+            insertNodeToHead(node);
+            size++;
+         }else{
+           removeLeastVisited();
+           insertNodeToHead(node);
+         }
+       }
         
+    }
+
+    void moveNodeToHead(Node node){
+        insertNodeToHead(removeNode(node));
+    }
+
+    void insertNodeToHead(Node cur){
+       System.out.println("soemthing2");
+        Node head = dummyHead.next;
+        dummyHead.next = cur;
+        cur.prev = dummyHead;
+        cur.next = head;
+        if(head != null){
+          head.prev = cur;
+        }
+    }
+    Node removeNode(Node cur){
+      System.out.println("soemthing1");
+        Node prev = cur.prev;
+        Node next = cur.next;
+        next.prev = prev;
+        prev.next = next;
+        return cur;
+    }
+    void removeLeastVisited(){
+        Node del = removeNode(tail.prev);
+        this.hash.remove(del.key);
     }
 }
 
