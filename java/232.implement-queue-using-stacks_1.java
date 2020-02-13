@@ -8,13 +8,14 @@ import java.util.Stack;
 
 // @lc code=start
 class MyQueue {
+
     Stack<Integer> mStack;
-    Stack<Integer> popStack;
+    Stack<Integer> hStack;
 
     /** Initialize your data structure here. */
     public MyQueue() {
-        mStack = new Stack();
-        popStack = new Stack();
+        mStack = new Stack<>();
+        hStack = new Stack<>();
 
     }
 
@@ -26,31 +27,34 @@ class MyQueue {
 
     /** Removes the element from in front of queue and returns that element. */
     public int pop() {
-        if (popStack.isEmpty()) {
-            while (!mStack.isEmpty()) {
-                popStack.push(mStack.pop());
-            }
-        }
-        return popStack.pop();
+        peek();
+        return hStack.pop();
 
     }
 
     /** Get the front element. */
     public int peek() {
-        if (popStack.isEmpty()) {
-            while (!mStack.isEmpty()) {
-                popStack.push(mStack.pop());
-            }
+        if (!hStack.isEmpty())
+            return hStack.peek();
+        while (!mStack.isEmpty()) {
+            hStack.push(mStack.pop());
         }
-        return popStack.peek();
+        return hStack.peek();
 
     }
 
     /** Returns whether the queue is empty. */
     public boolean empty() {
-        return popStack.isEmpty() && mStack.isEmpty();
+        return hStack.isEmpty() && mStack.isEmpty();
 
     }
+    // 1 2 push 3 pop push4 push5 pop pop pop
+    // queue 123
+    // 321
+    // 12 3 12
+    // 45
+    // 12
+    // 54
 }
 
 /**

@@ -11,18 +11,20 @@
  */
 class Solution {
     public boolean isValidBST(TreeNode root) {
+        // min max
         return isValidBST(root, null, null);
 
     }
 
-    boolean isValidBST(TreeNode root, TreeNode max, TreeNode min) {
+    private boolean isValidBST(TreeNode root, Integer min, Integer max) {
         if (root == null)
             return true;
-        if (max != null && root.val >= max.val)
+
+        if ((min != null && min >= root.val) || (max != null && max <= root.val)) {
+            // System.out.println("heree");
             return false;
-        if (min != null && root.val <= min.val)
-            return false;
-        return isValidBST(root.left, root, min) && isValidBST(root.right, max, root);
+        }
+        return (isValidBST(root.left, min, root.val)) && isValidBST(root.right, root.val, max);
     }
 }
 // @lc code=end

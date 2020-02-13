@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 /*
  * @lc app=leetcode id=155 lang=java
  *
@@ -5,54 +7,48 @@
  */
 
 // @lc code=start
-class Cell{
-    int val;
-    int min;
-    Cell(int v, int min){
-        this.val = v;
-        this.min = min;
-
-    }
-}
 class MinStack {
 
     /** initialize your data structure here. */
-    List<Cell> data;
+    Stack<Integer> mStack;
+    Stack<Integer> minStack;
+
     public MinStack() {
-         data = new LinkedList<Cell>();
+        mStack = new Stack();
+        minStack = new Stack();
+
     }
-    
+
     public void push(int x) {
-        int min =x;
-        if(data.size()!= 0){
-            min = Math.min(min, data.get(data.size()-1).min);
+        mStack.push(x);
+        if (minStack.isEmpty() || minStack.peek() >= x) {
+            minStack.push(x);
         }
-        data.add(new Cell(x, min));
-        
+
     }
-    
+
     public void pop() {
-        data.remove(data.size()-1);
+        int d = mStack.pop();
+        if (d == minStack.peek()) {
+            minStack.pop();
+        }
+
     }
-    
+
     public int top() {
-        return data.get(data.size()-1).val;
-        
+        return mStack.peek();
+
     }
-    
+
     public int getMin() {
-        return  data.get(data.size()-1).min;
-        
+        return minStack.peek();
+
     }
 }
 
 /**
- * Your MinStack object will be instantiated and called as such:
- * MinStack obj = new MinStack();
- * obj.push(x);
- * obj.pop();
- * int param_3 = obj.top();
- * int param_4 = obj.getMin();
+ * Your MinStack object will be instantiated and called as such: MinStack obj =
+ * new MinStack(); obj.push(x); obj.pop(); int param_3 = obj.top(); int param_4
+ * = obj.getMin();
  */
 // @lc code=end
-
