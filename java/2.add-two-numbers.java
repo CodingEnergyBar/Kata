@@ -18,6 +18,7 @@ class Solution {
     // carry
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
          int carry = 0;
+         
          // 可以这么写啊
          ListNode p, dummy = new ListNode(0);
          p = dummy;
