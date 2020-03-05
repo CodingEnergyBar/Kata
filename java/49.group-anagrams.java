@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -14,15 +15,18 @@ class Solution {
         for(String str: strs){
             String normalStr =  getNormalized(str);
             if(!hash.containsKey(normalStr)){
-                hash.compute(normalStr, new ArrayList<String>());
+                hash.put(normalStr, new ArrayList<String>());
             }
             hash.get(normalStr).add(str);
+
+            // System.out.println("str: " + str + " " + hash.toString());
         }
-        List<> res = new ArrayList<List>();
-        for(String key: hash.keySet()){
-            res.add(hash.get(key));
-        }
-        return res;
+        // List<> res = new ArrayList<List>();
+        // for(String key: hash.keySet()){
+        //     res.add(hash.get(key));
+        // }
+        return new ArrayList<List<String>>(hash.values());
+
         
     }
 
@@ -30,19 +34,38 @@ class Solution {
     String getNormalized(String str){
         char[] arr = str.toCharArray();
         int lo=0, hi=arr.length-1;
-        while(lo <= hi){
-            int pivot = lo + (hi- lo)/2; 
-            while(arr[lo] < arr[pivot] && lo <= hi) lo++;
-            while(arr[hi] > arr[pivot] && lo <= hi) hi--;
-            if(lo <= hi){
-                char tmp = arr[lo];
-                arr[lo] = arr[hi];
-                arr[hi] = tmp;
-                lo++;
-                hi--;
+        // Arrays.sort(arr);
+        quickSort(arr, 0, arr.length-1);
+
+        return new String(arr);
+    }
+    void quickSort(char[] arr, int start, int end){
+
+        //??
+        if(start >= end)
+            return;
+
+        int left = start, right= end;
+        // pivotIndex 在过程当中也被换掉了, 所以要在重新理解一遍这个含义
+        int pivotIndex = left + (right - left) /2;
+        char pivot = arr[pivotIndex];
+        while(left <= right){
+            while(arr[left] < pivot && left <= right) left++;
+            while(arr[right] > pivot && left <= right) right--;
+            if(left <= right){
+                swap(arr, left, right);
+                left++;
+                right--;
             }
         }
-        return new String(arr);
+        quickSort(arr, start, right);
+        quickSort(arr, left, end);
+        
+    }
+    void swap(char[] arr, int a, int b){
+        char tmp =  arr[a];
+        arr[a] = arr[b];
+        arr[b] =  tmp;
     }
 }
 // @lc code=end
