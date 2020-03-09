@@ -39,7 +39,7 @@ class Solution {
 
             // // every round, time ++
             // time++;
-            
+
             for (int l = 0; l < length; l++) {
                 Pair<Integer, Integer> cur = queue.poll();
                 int i = cur.getKey();
@@ -79,6 +79,7 @@ class Solution {
         }
         return true;
     }
+    // add test
 
     boolean inTheBound(int x, int y, int[][] grid) {
         if (x >= 0 && y >= 0 && x < grid.length && y < grid[0].length) {
