@@ -1,52 +1,55 @@
 /*
  * @lc app=leetcode id=200 lang=java
-*/
+ *
+ * [200] Number of Islands
+ */
+
 // @lc code=start
 class Solution {
-    boolean visited[][];
-    int res = 0;
-    int[][] d = { { 0, 1 }, { 0, -1 }, { 1, 0 }, { -1, 0 } };
-
     public int numIslands(char[][] grid) {
-        // ??
-        if (grid == null || grid.length == 0 || grid[0].length == 0)
-            return res;
-
-        visited = new boolean[grid.length][grid[0].length];
-
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[0].length; j++) {
-                if (!visited[i][j] && searchIsland(grid, i, j) == true) {
+        if(grid == null || grid.length == 0 || grid[0].length == 0)
+            return 0;
+        int res = 0;
+        for(int i=0; i<grid.length; i++){
+            for(int j=0; j<grid[0].length;j++){
+                if(findAnIsland(i, j, grid))
                     res++;
-                }
             }
         }
         return res;
-
+        
     }
-
-    // 标记
-    boolean searchIsland(char[][] grid, int x, int y) {
-
-        visited[x][y] = true;
-
-        if (grid[x][y] == '0') {
+    boolean findAnIsland(int i, int j, char[][] grid){
+        if(grid[i][j] == '0')
             return false;
-        }
-        if (grid[x][y] == '1') {
-            for (int i = 0; i < 4; i++) {
-                int newx = x + d[i][0];
-                int newy = y + d[i][1];
-                if (intheGrid(newx, newy, grid) && !visited[newx][newy]) {
-                    searchIsland(grid, newx, newy);
-                }
-            }
+        int dx[] =  new int []{1, -1, 0, 0};
+        int dy[] = new int []{0, 0, 1, -1};
+        Queue<Pair<Integer, Integer>> queue = new LinkedList<>();
+
+        queue.offer(new Pair(i, j));
+
+        while(!queue.isEmpty()){
+            Pair<Integer, Integer> cur = queue.poll();
+            Integer x = cur.getKey();
+            Integer y = cur.getValue();
+           for(int d=0; d<4; d++){
+               int newX = x + dx[d];
+               int newY = y + dy[d];
+               if (inTheBound(newX, newY, grid)&& grid[newX][newY] == '1'){
+                   grid[newX][newY] = '0';
+                   queue.offer(new Pair(newX, newY));
+               }
+           }
+
         }
         return true;
     }
-
-    boolean intheGrid(int x, int y, char[][] grid) {
-        return x >= 0 && y >= 0 && x < grid.length && y < grid[0].length;
+    boolean inTheBound(int i, int j, char[][] grid){
+        if(i >= 0 && i < grid.length && j>=0 && j< grid[0].length){
+            return true;
+        }
+        return false;
     }
 }
 // @lc code=end
+
