@@ -1,8 +1,3 @@
-import java.util.LinkedList;
-import java.util.Queue;
-
-import javax.swing.tree.TreeNode;
-
 /*
  * @lc app=leetcode id=572 lang=java
  *
@@ -11,27 +6,31 @@ import javax.swing.tree.TreeNode;
 
 // @lc code=start
 /**
- * Definition for a binary tree node. public class TreeNode { int val; TreeNode
- * left; TreeNode right; TreeNode(int x) { val = x; } }
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
  */
 class Solution {
     public boolean isSubtree(TreeNode s, TreeNode t) {
-        if (t == null)
+        if(t == null)
             return true;
-        if (s == null)
+        if(s ==  null)
             return false;
-        return isSameTree(s, t) || isSubtree(s.left, t) || isSubtree(s.right, t);
-
+        return isTheSame(s, t) || isSubtree(s.left, t) || isSubtree(s.right, t);
     }
-
-    public boolean isSameTree(TreeNode a, TreeNode b) {
-        if (a == null && b == null)
+    boolean isTheSame(TreeNode a, TreeNode b){
+        if(b == null && a == null)
             return true;
-        if (a == null || b == null)
+        if(b == null || a == null)
             return false;
-        if (a.val != b.val)
+        if(a.val != b.val)
             return false;
-        return isSameTree(a.left, b.left) && isSameTree(a.right, b.right);
+        return isTheSame(a.left, b.left) && isTheSame(a.right, b.right);
     }
 }
 // @lc code=end
+

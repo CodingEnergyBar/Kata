@@ -1,5 +1,3 @@
-import java.util.LinkedList;
-
 /*
  * @lc app=leetcode id=20 lang=java
  *
@@ -10,24 +8,30 @@ import java.util.LinkedList;
 class Solution {
     public boolean isValid(String s) {
         Stack<Character> stack = new Stack<>();
-        for (char a : s.toCharArray()) {
-            if (a == '(' || a == '[' || a == '{')
-                stack.push(a);
-            else {
-                if (stack.isEmpty())
+        for(char a: s.toCharArray()){
+            if(a == '('){
+                stack.push(')');
+            }else if(a == '{'){
+                stack.push('}');
+            }else if(a == '['){
+                stack.push(']');
+            }else{
+                // another special case
+                if(stack.isEmpty()) 
                     return false;
-                char c = (char) stack.pop();
-                if (a == ')' && c == '(')
-                    continue;
-                if (a == '}' && c == '{')
-                    continue;
-                if (a == ']' && c == '[')
-                    continue;
-                return false;
+                    
+                if(stack.peek() != a)
+                    return false;
+                else{
+                    stack.pop();
+                }
             }
+
         }
         return stack.isEmpty();
 
+        
     }
 }
 // @lc code=end
+
