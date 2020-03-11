@@ -6,35 +6,37 @@
 
 // @lc code=start
 class Solution {
-    // boolean result = false;
-    int memo[];
-
+    int [] memo;
     public boolean wordBreak(String s, List<String> wordDict) {
-        // -1 0 1
-        memo = new int[s.length() + 1];
+        // substring[)
+        Set<String> set = new HashSet<>(wordDict);
+        memo = new int[s.length()];
         Arrays.fill(memo, -1);
-
-        return dfs(0, s, wordDict) == 1;
-
+        return checkBreak(0, s, set);
+        
     }
-
-    // [start...end)
-    int dfs(int start, String s, List<String> wordDict) {
-
-        if (start == s.length()) {
-            return 1;
+    boolean checkBreak(int start, String s, Set<String> set){
+        if(start == s.length()){
+            return true;
         }
-        if (memo[start] != -1)
-            return memo[start];
-        int result = 0;
-        for (int i = start + 1; i <= s.length(); i++) {
-            if (wordDict.contains(s.substring(start, i))) {
-                if (dfs(i, s, wordDict) == 1)
-                    result = 1;
+        if(memo[start] == 0)
+            return false;
+        if(memo[start] == 1)
+            return true;
+
+        for(int i=start+1;i <= s.length(); i++ ){
+          
+            if(set.contains(s.substring(start, i))){
+                if(checkBreak(i,s, set)){
+                    memo[start] =  1;
+                    return true;
+                }
             }
         }
-        memo[start] = result;
-        return result;
+        memo[start] = 0;
+        return false;
+
     }
 }
 // @lc code=end
+

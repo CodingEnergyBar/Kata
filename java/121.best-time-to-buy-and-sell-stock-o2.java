@@ -7,7 +7,7 @@
 // @lc code=start
 class Solution {
     public int maxProfit(int[] prices) {
-          /*  the price bought and the price sell
+        /*  the price bought and the price sell
           Now the next element is 2 which have lower price than the stock 
           we bought previously which was 5. 
           So if we buy this stock at price $2 and 
@@ -15,22 +15,19 @@ class Solution {
           we will surely earn more profit than the stock 
           we bought at price 5. So we bought stock at $2.
         */
-        if(prices == null || prices.length < 2)
-            return 0;
-
-        int bought = prices[0], sold;
-        int maxDiff=0; // sold - bought;
-
-        for(int i=1; i<prices.length; i++){
-            sold = prices[i];
-            if(sold - bought > maxDiff)
-                maxDiff = sold - bought;
-            if(sold  < bought){
-                bought = sold;
+        int res = 0;
+        if(prices.length < 2){
+            return res;
+        }
+        
+        for(int i=0; i<prices.length-1;i++){
+            for(int j=i; j<prices.length;j++){
+                if(prices[j] - prices[i] > res){
+                    res = prices[j] - prices[i];
+                }
             }
         }
-        return maxDiff;
-        
+        return res;
     }
 }
 // @lc code=end
