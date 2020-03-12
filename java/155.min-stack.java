@@ -1,5 +1,3 @@
-import java.util.Stack;
-
 /*
  * @lc app=leetcode id=155 lang=java
  *
@@ -10,45 +8,51 @@ import java.util.Stack;
 class MinStack {
 
     /** initialize your data structure here. */
-    Stack<Integer> mStack;
-    Stack<Integer> minStack;
-
+    Stack<Integer> data;
+    Stack<Integer> curMin;
+ 
     public MinStack() {
-        mStack = new Stack();
-        minStack = new Stack();
-
+        data = new Stack<>();
+        curMin = new Stack<>();
     }
-
+    
     public void push(int x) {
-        mStack.push(x);
-        if (minStack.isEmpty() || minStack.peek() >= x) {
-            minStack.push(x);
+        data.push(x);
+        if(curMin.isEmpty() || curMin.peek() >= x){
+            curMin.push(x);
         }
-
+        
     }
-
+    
     public void pop() {
-        int d = mStack.pop();
-        if (d == minStack.peek()) {
-            minStack.pop();
+        if(data.isEmpty())
+            return;
+        int cur = data.peek();
+        if(curMin.peek() == cur){
+            curMin.pop();
         }
-
+        data.pop();
+        
     }
-
+    
     public int top() {
-        return mStack.peek();
-
+        return data.peek();
+        
     }
-
+    
     public int getMin() {
-        return minStack.peek();
-
+        return curMin.peek();
+        
     }
 }
 
 /**
- * Your MinStack object will be instantiated and called as such: MinStack obj =
- * new MinStack(); obj.push(x); obj.pop(); int param_3 = obj.top(); int param_4
- * = obj.getMin();
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack obj = new MinStack();
+ * obj.push(x);
+ * obj.pop();
+ * int param_3 = obj.top();
+ * int param_4 = obj.getMin();
  */
 // @lc code=end
+

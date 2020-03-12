@@ -11,65 +11,49 @@ import java.util.PriorityQueue;
 // @lc code=start
 class MedianFinder {
 
-    PriorityQueue<Integer> minHeap;
-    PriorityQueue<Integer> maxHeap;
-
     /** initialize your data structure here. */
+    PriorityQueue<Integer> minHeap ;
+    PriorityQueue<Integer> maxHeap ;
     public MedianFinder() {
-        // 0<= min - max <= 1
-        // [[maxHeap] [minHeap]]
-
-        minHeap = new PriorityQueue<>(Collections.reverseOrder());
-        maxHeap = new PriorityQueue<>();
-
+        minHeap = new PriorityQueue<>();
+        maxHeap = new PriorityQueue<>((x, y)-> y-x);
+        
     }
-
-    public void addNum(int num) {
-        if (minHeap.isEmpty()) {
-            minHeap.add(num);
-        } else {
-            if (minHeap.size() - maxHeap.size() == 1) {
-                // balance 放到 maxheap => max < min
-                // if (minHeap.peek() > num) {
-                // maxHeap.add(minHeap.poll());
-                // minHeap.add(num);
-                // } else {
-                // maxHeap.add(num);
-                // }
-                minHeap.offer(num);
-                maxHeap.offer(minHeap.poll());
-            } else {
-                // 放到 minheap 中 后面的
-                // num
-
-                // if (maxHeap.peek() < num) {
-                // minHeap.add(maxHeap.poll());
-                // maxHeap.add(num);
-                // } else {
-                // minHeap.add(num);
-                // }
-                maxHeap.offer(num);
+    
+    public void addNum(int num){
+        if(maxHeap.isEmpty() || num <= maxHeap.peek()){
+            maxHeap.offer(num);
+            if(maxHeap.size() > minHeap.size() + 1){
                 minHeap.offer(maxHeap.poll());
             }
-            // throw new Error("soemthign wrong");
+        }else{
+            minHeap.offer(num);
+            if(minHeap.size()> maxHeap.size()){
+                maxHeap.offer(minHeap.poll());
+            }
 
         }
-
+        // System.out.println("maxHeap " + maxHeap.toString());
+        // System.out.println("maxHeap peek " + maxHeap.peek());
+        // System.out.println("minHeap" + minHeap.toString());
+        // System.out.println("minHeap peek " + minHeap.peek());
+        
     }
-
+    
     public double findMedian() {
-        if (minHeap.size() == maxHeap.size()) {
-            return (minHeap.peek() + maxHeap.peek()) / 2.0;
-        } else {
-            return minHeap.peek();
-        }
-
+        if(minHeap.size() ==  maxHeap.size())
+            return (minHeap.peek()  + maxHeap.peek())/2.0;    
+        else{
+            return maxHeap.peek() * 1.0;
+        } 
     }
 }
 
 /**
  * Your MedianFinder object will be instantiated and called as such:
- * MedianFinder obj = new MedianFinder(); obj.addNum(num); double param_2 =
- * obj.findMedian();
+ * MedianFinder obj = new MedianFinder();
+ * obj.addNum(num);
+ * double param_2 = obj.findMedian();
  */
 // @lc code=end
+
