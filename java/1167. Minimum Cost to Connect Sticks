@@ -1,0 +1,48 @@
+import java.util.ArrayList;
+import java.util.List;
+
+/*
+ * @lc app=leetcode id=1167 lang=java
+ *
+ */
+
+// @lc code=start
+class Solution {
+   class Solution {
+    public int connectSticks(int[] sticks) {
+//         Arrays.sort(sticks);
+        if(sticks == null || sticks.length <= 1)
+                return 0;
+//         int sum = 0;
+//         int curLen = sticks[0];
+        
+//         for(int i=1; i<sticks.length; i++){
+            
+//             curLen = curLen + sticks[i];
+//             sum = sum + curLen;
+//         }
+//         return sum;
+        // 每次找最小的,数组会改变的饿
+        PriorityQueue<Integer> pq = new PriorityQueue<>((a, b)->a-b);
+        for(int i: sticks){
+            pq.offer(i);
+        }
+        
+        int sum = 0;
+
+        while(pq.size() != 1){
+            int first = pq.poll();
+            int second =  pq.poll();
+            int merged = first + second;
+            sum += merged;
+            pq.offer(merged);
+          
+        }
+        return sum;
+
+        
+    }
+
+}
+// @lc code=end
+
