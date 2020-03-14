@@ -7,60 +7,25 @@
 // @lc code=start
 class Solution {
     public int trap(int[] height) {
-        int len = height.length;
-        int[] leftGreater = new int[len];
-        int [] rightGreater = new int[len];
-
-        Stack<Integer> decreaseStack = new Stack<>();
-        for(int i=0; i<len; i++){
-            while(!decreaseStack.isEmpty() && height[decreaseStack.peek()] < height[i]){
-                int resIndex = decreaseStack.pop();
-                rightGreater[resIndex] = i;
+        Stack <Integer> dStack = new Stack<>();
+        int totalWater = 0;
+        for(int i=0; i < height.length; i++){
+            int last = 0;
+            // 这里是小于/ 小于等于都可以 囧
+            while(!dStack.isEmpty() && height[dStack.peek()] < height[i]){
+                int pre = dStack.pop();
+                totalWater += (height[pre] - height[last]) * (i - pre - 1);
+                last = pre;
             }
-            decreaseStack.push(i);
-        }
-        while(!decreaseStack.isEmpty()){
-            int resIndex = decreaseStack.pop();
-            rightGreater[resIndex] = -1;
-        }
-        // left 
-        for(int i=len-1; i>=0; i--){
-            while(!decreaseStack.isEmpty() && height[decreaseStack.peek()] < height[i]){
-                int resIndex = decreaseStack.pop();
-                leftGreater[resIndex] = i;
+            if(!dStack.isEmpty()){
+                // height[dStack.peek()] >= height[i])
+                totalWater += (height[i] - height[last]) * (i - dStack.peek() -1);
             }
-            decreaseStack.push(i);
+            dStack.push(i);
         }
-        while(!decreaseStack.isEmpty()){
-            int resIndex = decreaseStack.pop();
-            leftGreater[resIndex] = -1;
-        }
-        //    System.out.println("leftGreater");
-        // System.out.println(Arrays.toString(leftGreater));
-     
-        // System.out.println("rightGreater");
-        // System.out.println(Arrays.toString(rightGreater));
-        int water = 0;
-        Set<String> visited = new HashSet<>();
-        for(int i=0; i<len; i++){
-            int rIndex = rightGreater[i];
-            int lIndex = leftGreater[i];
-            
-            if(rIndex != -1 && lIndex != -1 && !visited.contains(lIndex + " " + rIndex)){
-              
-                visited.add(lIndex + " " + rIndex);
-                int w = Math.abs(rIndex - lIndex) - 1;
-                int h = Math.min(height[rIndex], height[lIndex]) - height[i];
-                            // System.out.println("i: " + i + " w: " + w + " h: " + h);
-                water += w * h;
-    
-            }
-        }
-        return water;
+        //最后一层是咋回事??)
 
-
-
-
+        return totalWater;
         
     }
 }

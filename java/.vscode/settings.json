@@ -1,0 +1,7 @@
+{
+    "editor.defaultFormatter": "redhat.java",
+    "[java]": {
+        "editor.defaultFormatter": "redhat.java"
+    }
+    
+}

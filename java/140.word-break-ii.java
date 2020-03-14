@@ -9,17 +9,18 @@ class Solution {
     // 0 nothing yet, -1 none, 1 yes;
     int[] memo;
     List<String>[] memoData;
-    
+
     public List<String> wordBreak(String s, List<String> wordDict) {
         int start = 0;
         Set dict = new HashSet<String>(wordDict);
-        memo
+
         findCombination(0, s, dict, new ArrayList<String>());
 
         
         
         
     }
+
     void findCombination(int start, String s, Set<String> dict, ArrayList<String> path){
         if(start == s.length()){
             res.append()
