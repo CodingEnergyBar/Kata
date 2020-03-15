@@ -7,20 +7,19 @@
 // @lc code=start
 class Solution {
     public int findMin(int[] nums) {
-        // [left,right]
-        int left = 0, right = nums.length - 1, mid;
-        while (left < right) {
-            mid = (left + right) / 2;
-            // nums[left] nums[right]
-            if (nums[mid] > nums[right]) {
-                left = mid + 1;
-            } else {
-                right = mid;
+        // [l...r]
+        int l=0, r=nums.length-1;
+        while(l+1<r){
+            int m = l + (r-l)/2;
+            if(nums[m] < nums[nums.length-1]){
+                r = m;
+            }else{
+                l = m;
             }
-
         }
-        return nums[left];
-
+        return Math.min(nums[r], nums[l]);
+        
     }
 }
 // @lc code=end
+
