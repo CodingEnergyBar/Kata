@@ -5,38 +5,25 @@
  */
 
 // @lc code=start
-
-//sliding window
 class Solution {
     public int lengthOfLongestSubstring(String s) {
-        if(s==null || s.length() ==0)
-            return 0;
+
+        if(s == null || s.length() == 0)
+                return 0;
+        //如果第一个数要写进去的话, hash 也要改
+        int res = 0;
+        int l = 0, r = -1;
         int[] hash = new int[256];
-        int i=0, j=0;
-        int res=0;
-        //[...i...j)
-        // for(; i<s.length();i++){
-        //     char cur = s.charAt(i);
-        //     for(;j<s.length()&& hash[s.charAt(j)] == 0;j++){
-        //         hash[s.charAt(j)] = 1;
-        //     }
-        //     hash[cur] = 0;
-        //     res = Math.max(res, j-i);
-        // }
-while(j<s.length()){
-    char end = s.charAt(j);
-    if(hash[end] == 1){
-        
-        hash[s.charAt(i)] = 0;
-        i++;
-    }else{
-        // 这里 不停的更新, 而不是上面 [i...j] 均满足条件
-        res = Math.max(res, j-i+1);
-            hash[end] = 1;
-            j++;
-    }
-}
-return res;
+        char[] charArr = s.toCharArray();
+        while(l< charArr.length){
+            if(r+1 < charArr.length && hash[charArr[r+1]] == 0){
+                 hash[charArr[++r]] = 1;
+                 res =  Math.max(r-l+1, res);
+            }else
+                 hash[charArr[l++]] = 0;  
+           
+        }
+        return res;
     }
 }
 // @lc code=end

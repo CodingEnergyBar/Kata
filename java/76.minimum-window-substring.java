@@ -6,50 +6,54 @@
 
 // @lc code=start
 class Solution {
+
+
     public String minWindow(String s, String t) {
-        int[] source = new int[256];
-        int[] target = new int[256];
-        for (char c : t.toCharArray()) {
-            target[c] += 1;
-            // System.out.println("target[c] " + target[c]);
+
+        Map<Character, Integer> tMap = new HashMap<>();
+        Map<Character, Integer> sMap = new HashMap<>();
+        for (char a : t.toCharArray()) {
+            if (!tMap.containsKey(a)) {
+                tMap.put(a, 1);
+            } else {
+                tMap.put(a, tMap.get(a) + 1);
+            }
         }
-
-        int l = 0, r = 0; // [l.. r)
-
-        int resl = -1, resr = -1;
-
-        // found one cadidate
-        for (; l < s.length(); l++) {
-            
-            while (r < s.length() && !isValidWindow(source, target)) {
-                source[s.charAt(r)]++;
+        for (char a : s.toCharArray()) {
+            sMap.put(a, 0);
+        }
+        int l = 0, r = -1;
+        boolean found = false;
+        String res = s;
+        while (l < s.length()) {
+            if (r + 1 < s.length() && !tMapFilled(sMap, tMap)) {
                 r++;
+                char cr = s.charAt(r);
+                sMap.put(cr, sMap.get(cr) + 1);
+            } else {
+                char cl = s.charAt(l);
+                sMap.put(cl, sMap.get(cl) - 1);
+                l++;
             }
-            System.out.println(s.substring(l, r));
 
-            if (isValidWindow(source, target)) {
-                if (resl == -1 || r - l < resl - resr) {
-                    resl = l;
-                    resr = r;
-                }
+            if (tMapFilled(sMap, tMap) && r - l + 1 <= res.length()) {
+                found = true;
+                res = s.substring(l, r + 1);
+                // System.out.println("answer " +res);
+
             }
-            
-            // remove from window
-            source[s.charAt(l)]--;
-            // if(source[s.charAt(l)] == target)
         }
-
-        return s.substring(resl, resr);
+        if (found == false) {
+            return "";
+        } else {
+            return res;
+        }
 
     }
 
-    boolean isValidWindow(int[] source, int[] target) {
-        for (int i = 0; i < 256; i++) {
-            // int cur = i + 'A';
-
-            // System.out.print(source[i] + " " + target[i]);
-            // System.out.println();
-            if (source[i] < target[i]) {
+    boolean tMapFilled(Map<Character, Integer> sMap, Map<Character, Integer> tMap) {
+        for (Character a : tMap.keySet()) {
+            if (!sMap.containsKey(a) || sMap.get(a) < tMap.get(a)) {
                 return false;
             }
         }
