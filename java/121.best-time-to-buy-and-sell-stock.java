@@ -7,30 +7,20 @@
 // @lc code=start
 class Solution {
     public int maxProfit(int[] prices) {
-          /*  the price bought and the price sell
-          Now the next element is 2 which have lower price than the stock 
-          we bought previously which was 5. 
-          So if we buy this stock at price $2 and 
-          sells it in future then 
-          we will surely earn more profit than the stock 
-          we bought at price 5. So we bought stock at $2.
-        */
-        if(prices == null || prices.length < 2)
-            return 0;
+        //跟时间是没有关系的, 只跟数值有关系
+        int buyDay = 0;
+        int maxProfit = 0;
 
-        int bought = prices[0], sold;
-        int maxDiff=0; // sold - bought;
-
-        for(int i=1; i<prices.length; i++){
-            sold = prices[i];
-            if(sold - bought > maxDiff)
-                maxDiff = sold - bought;
-            if(sold  < bought){
-                bought = sold;
+        for(int i=0; i<prices.length;i++){
+            int profit = prices[i]  - prices[buyDay];
+            if(profit > maxProfit){
+                maxProfit = profit;
+            }
+            if(prices[i] < prices[buyDay]){
+                buyDay = i;
             }
         }
-        return maxDiff;
-        
+        return maxProfit;
     }
 }
 // @lc code=end

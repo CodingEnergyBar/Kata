@@ -5,107 +5,119 @@
  */
 
 // @lc code=start
-
-class Node{
-  int key;
-  int val;
-  Node prev;
-  Node next;
-  Node(){
-  }
-  Node(int key, int value){
-    this.key = key;
-    this.val = value;
-  }
-}
 class LRUCache {
+    class Node{
+        int key;
+        int val;
+        Node prev;
+        Node next;
+        Node(int k, int v){
+            this.key = k;
+            this.val = v;
+        }
+        Node(){
+            this.key = Integer.MAX_VALUE;
+            this.val = Integer.MAX_VALUE;
+        }
+      
+    }
+   void print(){
+       Node n = head;
+        while(n != null){
+            System.out.print(n.val + " -> ");
+            n = n.next;
+        }
+         System.out.println(" ");
+    }
+
     int capacity;
-    private int size;
-    private Map<Integer, Node> hash;
-
-    // freq
-    private Node dummyHead;
-    //???
-    private Node dummyTail;;
-
+    Map<Integer, Node> hash;
+    Node head, tail;
+    
     public LRUCache(int capacity) {
-      this.capacity = capacity;
-      this.dummyHead = new Node();
-      this.dummyTail = new Node();
-      this.dummyHead.next = dummyTail;
-      this.dummyTail.prev = dummyHead;
-
-      this.hash = new HashMap<>();
+        
+        this.hash = new HashMap<Integer, Node>();
+        this.capacity = capacity;
+        
+        this.head = new Node();
+        this.tail = new Node();
+        
+        this.head.next = this.tail;
+        this.tail.prev = this.head;
         
     }
     
     public int get(int key) {
-      if(hash.containsKey(key)){
-        // 定位 freqlist 不容易
-        Node node = hash.get(key);
-        upliftNode(node);
-        return node.val;
-      }
-
-      return -1;
-        
-    }
-    private void upliftNode(Node node){
-         deleteNode(node);
-         insertNodeAfter(node, dummyHead);
-
-    }
-    private void deleteNode(Node node){
-    
-       Node prev = node.prev;
-       Node next = node.next;
-       prev.next =  next;
-       if(next != null) next.prev= prev;
-    }
-    private void insertNodeAfter(Node cur, Node target){
-
-       Node next =  target.next;
-       target.next = cur;
-       cur.prev = target;
-       cur.next = next;
-
-       if(next != null) next.prev = cur;
+        if(hash.containsKey(key)){
+            Node n = hash.get(key);
+            
+            n = removeNode(n);
+            upliftNode(n);
+            
+            return n.val;
+        }
+        return -1;
     }
     
     public void put(int key, int value) {
-
-      if(hash.containsKey(key)){
-        Node cur = hash.get(key);
-        cur.val = value;
-
-        upliftNode(cur);
-
-      }else{
-        if(size == capacity){
-          deleteLeastVisited();
+        if(hash.containsKey(key)){
+            Node n = hash.get(key);
+      
+            
+            n = removeNode(n);
+            upliftNode(n);
+            
+            n.val = value;
+        }else{
+            if(hash.size() == capacity){
+                Node nLast = removeNode(tail.prev);
+                hash.remove(nLast.key);
+                
+            }
+              
+            Node n = new Node(key, value);
+            hash.put(key, n);
+            upliftNode(n);
         }
-
-
-        Node cur = new Node(key, value);
-        insertNodeAfter(cur, dummyHead);
-        size++;
-        hash.put(key, cur);
-      }
+        // print();
+    }
+    
+    void upliftNode(Node n){
+        Node next = head.next;
         
+        n.next = next;
+        next.prev= n;
+        
+        head.next = n;
+        n.prev = head;
     }
-    private void deleteLeastVisited(){
-       Node d = dummyTail.prev;
-  
-
-       Node prev= d.prev;
-       prev.next = dummyTail;
-       dummyTail.prev =  prev;
-
-       //hash key 
-       hash.remove(d.key);
+    Node removeNode(Node n){
+        Node prev = n.prev;
+        Node next = n.next;
+        
+        if(prev != null) prev.next = next;
+        if(next != null) next.prev = prev;
+        
+        n.prev = null;
+        n.next = null;
+        return n;
     }
+    
 }
 
 
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache obj = new LRUCache(capacity);
+ * int param_1 = obj.get(key);
+ * obj.put(key,value);
+ */
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache obj = new LRUCache(capacity);
+ * int param_1 = obj.get(key);
+ * obj.put(key,value);
+ */
 // @lc code=end
 

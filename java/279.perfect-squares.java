@@ -6,33 +6,39 @@
 
 // @lc code=start
 class Solution {
-    int[] memo;
-
     public int numSquares(int n) {
-        memo = new int[n + 1];
-        Arrays.fill(memo, -1);
+        Queue<Integer> queue = new LinkedList<>();
 
-        return findSquares(n);
+        queue.offer(n);
+        // visited[], 必须是 boolean 而不是 int
+        boolean[] visited = new boolean[n];
 
-    }
-
-    // 0 9
-    int findSquares(int cur) {
-        if (cur == 0)
-            return 0;
-
-        if (cur == 1)
-            return 1;
-
-        if (memo[cur] != -1)
-            return memo[cur];
-        int step = Integer.MAX_VALUE;
-        for (int i = 1; i * i <= cur; i++) {
-
-            step = Math.min(step, findSquares(cur - i * i) + 1);
+        int step = 0;
+        while(!queue.isEmpty()){
+         
+            int size = queue.size();
+               step++;
+            for(int i=0; i<size; i++){
+                int rest = queue.poll();
+                
+                for(int j=1; j*j <= rest; j++){
+                    if(j*j == rest){
+                        return step;
+                    }else{
+                        int r = rest - j*j;
+                        if(!visited[r]){
+                            visited[r] = true;
+                        queue.offer(r);
+                        }
+                    }
+                }
+            
+            }
         }
-        memo[cur] = step;
         return step;
+
     }
+    
 }
 // @lc code=end
+

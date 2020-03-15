@@ -7,31 +7,28 @@
 // @lc code=start
 class Solution {
     public void sortColors(int[] nums) {
-        int zero = -1, two = nums.length;
-        for (int i = 0; i < two;) {
-            int cur = nums[i];
-            if (cur == 1) {
-                i++;
-            } else if (cur == 2) {
-                // !! two--
-                swap(i, --two, nums);
-            } else {
-                assert (cur == 0);
-                // !!! zero++ i++: zero在i的后面, 所以 zero++的项目已经检查过了 要么1
-                // 要么是0
-                swap(++zero, i++, nums);
+        // [0...lt) [lt gt], (gt len-1]
+        int len = nums.length;
+        int lt=0, gt= len-1, p=lt;
+        while(p<=gt){
+            if(nums[p]<1){
+                swap(lt, p, nums);
+                lt++;
+                   p++;
+            }else if(nums[p]>1){
+                swap(gt, p, nums);
+                gt--;
+            }else{
+                p++;
             }
-            // System.out.println(Arrays.toString(nums));
+            // System.out.println("nums "+ Arrays.toString(nums));
         }
-
     }
-
-    void swap(int i, int j, int[] arr) {
-        if (i == j)
-            return;
-        int tmp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = tmp;
+    void swap(int n, int m, int[] nums){
+        int tmp = nums[n];
+        nums[n] = nums[m];
+        nums[m] = tmp;
     }
 }
 // @lc code=end
+
