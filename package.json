@@ -2,7 +2,7 @@
     "name": "Katas",
     "version": "1.0.0",
     "scripts": {
-        "deploy": "npx @appnest/readme generate && git add .&& git commit -m $1"
+        "deploy": "npx @appnest/readme generate && git add .&& git commit -m $1 && git push"
     },
     "repository": {
         "type": "git",
