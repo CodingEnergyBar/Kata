@@ -1,5 +1,5 @@
 ## Dynamic Programming
 
-九章侯卫东tutorial [linkTobeAdded]()
+NineChapter_DP_Tutorial [58vo](https://pan.baidu.com/s/1I4ek_rVZI-d5h8m-zWvA3A)
 
 
