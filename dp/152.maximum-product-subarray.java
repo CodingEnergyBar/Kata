@@ -59,8 +59,6 @@ class Solution {
                     dp[i][j] = Math.max(dp[i][j],dp[i][j-1]);
                     System.out.println("dp["+i +"]["+j+"]: " + Arrays.deepToString(dp));
                 }
-                
-
             }
             // for(int j=i; j<nums.length;j++){
 
