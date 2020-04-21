@@ -6,6 +6,8 @@ public class GraphDFS {
     private boolean[] visited;
 
     private ArrayList<Integer> order = new ArrayList<>();
+    private ArrayList<Integer> pre = new ArrayList<>();
+    private ArrayList<Integer> post = new ArrayList<>();
 
     public GraphDFS(Graph G){
 
@@ -17,20 +19,27 @@ public class GraphDFS {
     private void dfs(int v){
 
         visited[v] = true;
-        order.add(v);
+        pre.add(v);
         for(int w: G.adj(v))
             if(!visited[w])
                 dfs(w);
+        post.add(v);
     }
 
-    public Iterable<Integer> preorder(){
-        return order;
+    public Iterable<Integer> pre(){
+        return pre;
     }
+
+    public Iterable<Integer> post(){
+        return post;
+    }
+
 
     public static void main(String[] args){
 
         Graph g = new Graph("graph.txt");
         GraphDFS graphDFS = new GraphDFS(g);
-        System.out.println(graphDFS.preorder());
+        System.out.println(graphDFS.pre());
+        System.out.println(graphDFS.post());
     }
 }
