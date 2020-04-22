@@ -51,8 +51,13 @@ public class CC {
 
     public static void main(String[] args){
 
-        Graph g = new Graph("graph.txt");
-        CC cc = new CC(g);
-        System.out.println(cc.count());
+        Graph g = new Graph("g.txt");
+        CycleDetection cycleDetection = new CycleDetection(g);
+        System.out.println(cycleDetection.hasCycle());
+
+        Graph g2 = new Graph("g2.txt");
+        CycleDetection cycleDetection2 = new CycleDetection(g2);
+        System.out.println(cycleDetection2.hasCycle());
     }
 }
+
