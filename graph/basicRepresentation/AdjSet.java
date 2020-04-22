@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class AdjSet {
+public class AdjSet implements GraphInterface {
 
     private int V;
     private int E;
@@ -87,7 +87,7 @@ public class AdjSet {
 
     public static void main(String[] args){
 
-        AdjSet adjSet = new AdjSet("graph.txt");
+        GraphInterface adjSet = new AdjSet("graph.txt");
         System.out.print(adjSet);
     }
 }

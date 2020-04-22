@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class AdjMatrix {
+public class AdjMatrix implements GraphInterface {
 
     private int V;
     private int E;
@@ -86,7 +86,7 @@ public class AdjMatrix {
 
     public static void main(String[] args){
 
-        AdjMatrix adjMatrix = new AdjMatrix("graph.txt");
+        GraphInterface adjMatrix = new AdjMatrix("graph.txt");
         System.out.print(adjMatrix);
     }
 }

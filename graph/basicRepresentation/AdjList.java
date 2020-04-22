@@ -1,10 +1,9 @@
 import java.io.*;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
-public class AdjList {
+public class AdjList implements GraphInterface {
 
     private int V;
     private int E;
