@@ -20,7 +20,7 @@
 //  test:[3,5,1,6,2,0,8,null,null,7,4]\n5\n1
 // assume not p, q in the binary tree
 var lowestCommonAncestor = function(root, p, q) {
-	[ a, b, lca ] = helper(root, p, q);
+	const [ a, b, lca ] = helper(root, p, q);
 	if (a && b) {
 		console.log('lca', lca.val);
 		return lca;

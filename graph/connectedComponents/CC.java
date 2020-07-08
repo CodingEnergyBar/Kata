@@ -38,7 +38,6 @@ public class CC {
     public boolean isConnected(int v, int w){
         return visited[v] == visited[w];
     }
-
     public ArrayList<Integer>[] components(){
         ArrayList<Integer>[] res = new ArrayList[cccount];
         Arrays.fill(res, new ArrayList<Integer>());

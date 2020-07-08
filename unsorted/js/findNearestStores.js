@@ -31,3 +31,4 @@ const findNearestStore = function (stores, houses) {
 		return Math.abs(stores[store_index] - house);
 	}
 };
+
