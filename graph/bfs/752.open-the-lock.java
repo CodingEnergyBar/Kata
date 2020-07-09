@@ -14,7 +14,7 @@ import java.util.Set;
 class Solution {
     public int openLock(String[] deadends, String target) {
         int[] dirs = new int[] {1, 9};
-        Set<String> visited = new HashSet();
+        Set<String> visited = new HashSet<>();
         Set<String> deadendsSet = new HashSet<>();
         Collections.addAll(deadendsSet, deadends);
         if(deadendsSet.contains(target) || deadendsSet.contains("0000"))

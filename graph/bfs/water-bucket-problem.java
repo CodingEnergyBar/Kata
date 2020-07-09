@@ -84,10 +84,10 @@ class WaterBucketSolution {
         return res;
     }
 
-    public static void main(String[] args) {
+    // public static void main(String[] args) {
 
-        System.out.println(new WaterBucketSolution().result());
-    }
+    //     System.out.println(new WaterBucketSolution().result());
+    // }
 }
 // @lc code=end
 
