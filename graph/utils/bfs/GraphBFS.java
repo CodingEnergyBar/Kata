@@ -1,3 +1,4 @@
+package graph.utils.bfs;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -5,39 +6,40 @@ import java.util.Queue;
 
 public class GraphBFS {
 
-    private Graph G;
-    private boolean[] visited;
+    private final Graph G;
+    private final boolean[] visited;
     List<Integer> order;
 
-    GraphBFS(Graph g){
+    GraphBFS(final Graph g) {
         this.G = g;
         order = new ArrayList<Integer>();
         visited = new boolean[G.V()];
         bfs();
     }
-    void bfs(){
-        Queue<Integer> queue = new LinkedList<>();
+
+    void bfs() {
+        final Queue<Integer> queue = new LinkedList<>();
         queue.add(0);
-        while(!queue.isEmpty()){
-            int cur = queue.poll();
+        while (!queue.isEmpty()) {
+            final int cur = queue.poll();
             visited[cur] = true;
             order.add(cur);
-            for(int w: G.adj(cur)){
-                if(!visited[w]){
+            for (final int w : G.adj(cur)) {
+                if (!visited[w]) {
                     queue.add(w);
                 }
             }
         }
     }
 
-    List<Integer> order(){
+    List<Integer> order() {
         return order;
     }
 
-    public static void main(String args[]){
+    public static void main(final String args[]) {
 
-        Graph g = new Graph("g.txt");
-        GraphBFS graphBFS = new GraphBFS(g);
+        final Graph g = new Graph("g.txt");
+        final GraphBFS graphBFS = new GraphBFS(g);
         System.out.println("BFS Order : " + graphBFS.order());
 
     }

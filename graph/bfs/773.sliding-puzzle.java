@@ -57,6 +57,7 @@ class Solution {
             tmp = tmp / 10;
         }
     
+        // x --> / y --> %
         int zx =  zero / 3, zy = zero % 3;
 
         for(int i=0 ; i< dirs.length; i++){

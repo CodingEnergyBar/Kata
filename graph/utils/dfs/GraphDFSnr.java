@@ -1,6 +1,9 @@
+package graph.utils.dfs;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
+
+import graph.utils.Graph;
 
 public class GraphDFSnr {
     Graph g;
