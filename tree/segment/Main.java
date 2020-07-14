@@ -13,7 +13,8 @@ public class Main {
         // ===> lambda
 
         SegmentTree<Integer> segmentTree = new SegmentTree<>(nums, (a, b)->(a + b));
-        System.out.println(segmentTree.toString());
+
+        System.out.println(segmentTree.query(0,5));
     }
 
     // 某个区间相应的最大值或者最小值
