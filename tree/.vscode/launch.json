@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - MapSum",
+            "request": "launch",
+            "mainClass": "MapSum",
+            "projectName": "tree_18f51e47"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - WordDictionary",
             "request": "launch",
             "mainClass": "WordDictionary",
