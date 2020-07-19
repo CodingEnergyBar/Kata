@@ -11,12 +11,12 @@ class Node {
         isWord = false;
         nexts = new TreeMap<>();
     }
-}
+}   
 
 // 第一版
-class UnionFind implements UF{
+class UnionFind1 implements UF{
     int[] id;
-    UnionFind(int size){
+    UnionFind1(int size){
         id = new int[size];
         // 初始的 id 值是编号
         for(int i=0; i<size;i++)
@@ -29,7 +29,7 @@ class UnionFind implements UF{
 
 	@Override
 	public int quickFind(int p) {
-		return 0;
+		return id[p];
 	}
 
 	@Override
@@ -50,7 +50,7 @@ class UnionFind implements UF{
     }
 
     private int find(int p){
-        if(p < id.length)
+        if(p >= id.length)
             throw new IllegalArgumentException("p is out of bound");
         return id[p];
     }
