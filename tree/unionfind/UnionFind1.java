@@ -27,10 +27,6 @@ class UnionFind1 implements UF{
         return find(p) == find(q);
 	}
 
-	@Override
-	public int quickFind(int p) {
-		return id[p];
-	}
 
 	@Override
 	public int getSize() {
