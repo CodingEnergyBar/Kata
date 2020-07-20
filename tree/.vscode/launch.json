@@ -8,6 +8,13 @@
             "type": "java",
             "name": "CodeLens (Launch) - Main",
             "request": "launch",
+            "mainClass": "bst.Main",
+            "projectName": "tree_18f51e47"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Main",
+            "request": "launch",
             "mainClass": "unionfind.Main",
             "projectName": "tree_18f51e47"
         },

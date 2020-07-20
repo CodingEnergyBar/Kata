@@ -2,8 +2,9 @@ package trie;
 
 import java.io.File;
 import java.util.ArrayList;
+
+import bstBackup.BSTSet;
 import utils.FileOperation;
-import bst.BSTSet;
 
 public class Main {
     public static void main(String[] args) {
