@@ -78,7 +78,36 @@ public class BST <E extends Comparable<E>>{
     }
 
 
-    private Boolean contains(Node cur, E e){
+    public E removeMax(){
+        // 并没有利用 maximum, 去删除, 还是要删除, 因为要 parent
+        E ret = maximum();
+        if(root != null)
+            root = removeMax(root);
+        return ret;
+    }
+    //删除以 cur 为根的 最小节点
+    //返回新的根
+    private Node removeMax(Node root){
+        Node ret;
+        if(root.right != null)
+            root.right = removeMax(root.right);
+        // 找到了要删除的节点
+        ret = root.left;
+        root = null;
+        return ret;
+    }
+
+    public E maximum() {
+        return maximum(root);
+    }
+
+    private E maximum(BST<E>.Node cur) {
+        if(cur.right != null)
+            return  maximum(cur.right);
+        return cur.e;
+    }
+
+    private Boolean contains(Node cur, E e) {
         if(cur == null)
             return false;
         if(e.compareTo(cur.e) > 0){
