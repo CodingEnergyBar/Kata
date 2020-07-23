@@ -2,59 +2,51 @@ package bst;
 
 import java.util.Stack;
 
-public class BST <K extends Comparable<K>, V>{
+public class BSTnokey <E extends Comparable<E>>{
 
     class Node {
-        K key;
-        V value;
+        E e;
         Node left;
         Node right;
 
-        Node(K k, V v){
-            this.key = k;
-            this.value = v;
+        Node(E e){
+            this.e = e;
             left = null;
             right = null;
         }
     }
     Node root;
     int size;
-    
-    BST(){
+    BSTnokey(){
         root = null;
         size = 0;
     }
 
-    public int getSize(){
-        return size;
-    }
-
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
-    public void add(K k, V v){
-        root = add(root, k, v);
+    public void add(E e){
+        if(root == null){
+            root = new Node(e);
+            return;
+        }
+        root = add(root, e);
     }
     // e 可能是 root 的孩子, 也可能就是root
-    private Node add( Node cur, K k, V v){
+    private Node add( Node cur, E e){
         // 先保证 cur != null
         if(cur == null){
-            size++;
-            return new Node(k, v); 
+            return new Node(e); 
         }
         // 为什么返回的是左孩子的根呢
-        if(k.compareTo(cur.key) > 0){
-            cur.right = add(cur.right, k, v);     
-        }else if(k.compareTo(cur.key) < 0){
-            cur.left = add(cur.left, k, v);
+        if(e.compareTo(cur.e) > 0){
+            cur.right = add(cur.right, e);     
+        }else if(e.compareTo(cur.e) < 0){
+            cur.left = add(cur.left, e);
         }
         // 这里把 根节点也返回了, 把左孩子改写之后
         return cur;
     }
 
-    public Boolean contains(K k){
-        return contains(root, k);
+    public Boolean contains(E e){
+        return contains(root, e);
     }
 
     public void preOrder(){
@@ -65,7 +57,7 @@ public class BST <K extends Comparable<K>, V>{
 
         if (node == null)
             return;
-        System.out.println(node.key);
+        System.out.println(node.e);
         preOrder(node.left);
         preOrder(node.right);
     }
@@ -78,7 +70,7 @@ public class BST <K extends Comparable<K>, V>{
             Node cur = stack.pop();
             if(cur == null)
                  continue;
-            System.out.println(cur.key);
+            System.out.println(cur.e);
             stack.push(cur.right);
             stack.push(cur.left);
            
@@ -86,9 +78,9 @@ public class BST <K extends Comparable<K>, V>{
     }
 
 
-    public K removeMax(){
+    public E removeMax(){
         // 并没有利用 maximum, 去删除, 还是要删除, 因为要 parent
-        K ret = maximum();
+        E ret = maximum();
         if(root != null)
             root = removeMax(root);
         return ret;
@@ -105,55 +97,26 @@ public class BST <K extends Comparable<K>, V>{
         return ret;
     }
 
-    public K maximum() {
+    public E maximum() {
         return maximum(root);
     }
 
-    private K maximum(BST<K, V>.Node cur) {
+    private E maximum(BST<E>.Node cur) {
         if(cur.right != null)
             return  maximum(cur.right);
-        return cur.key;
+        return cur.e;
     }
 
-    private Boolean contains(Node cur, K e) {
+    private Boolean contains(Node cur, E e) {
         if(cur == null)
             return false;
-        if(e.compareTo(cur.key) > 0){
+        if(e.compareTo(cur.e) > 0){
             return contains(cur.right, e);
         }
-        else if(e.compareTo(cur.key) < 0){
+        else if(e.compareTo(cur.e) < 0){
             return contains(cur.left, e);
         }
         return true;
-    }
-
-
-    // 返回以node为根节点的二分搜索树中，key所在的节点
-    private Node getNode(Node node, K key) {
-
-        if (node == null)
-            return null;
-
-        if (key.equals(node.key))
-            return node;
-        else if (key.compareTo(node.key) < 0)
-            return getNode(node.left, key);
-        else // if(key.compareTo(node.key) > 0)
-            return getNode(node.right, key);
-    }
-
-    public V get(K key) {
-        Node node = getNode(root, key);
-        return node == null ? null : node.value;
-    }
-
-
-    public void set(K key, V newValue){
-        Node node = getNode(root, key);
-        if(node == null)
-            throw new IllegalArgumentException(key + " doesn't exist!");
-
-        node.value = newValue;
     }
    
     

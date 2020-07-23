@@ -1,18 +1,20 @@
-package bst;
+package avl;
 
 import java.util.Stack;
 
-public class BST <K extends Comparable<K>, V>{
+public class AVLTree <K extends Comparable<K>, V>{
 
     class Node {
         K key;
         V value;
         Node left;
         Node right;
+        int height, balanceFactor;
 
         Node(K k, V v){
             this.key = k;
             this.value = v;
+            this.height = 1;
             left = null;
             right = null;
         }
@@ -20,7 +22,7 @@ public class BST <K extends Comparable<K>, V>{
     Node root;
     int size;
     
-    BST(){
+    AVLTree(){
         root = null;
         size = 0;
     }
@@ -29,7 +31,7 @@ public class BST <K extends Comparable<K>, V>{
         return size;
     }
 
-    public boolean isEmpty() {
+    public boolean isEmpty() {   
         return size == 0;
     }
 
@@ -50,7 +52,14 @@ public class BST <K extends Comparable<K>, V>{
             cur.left = add(cur.left, k, v);
         }
         // 这里把 根节点也返回了, 把左孩子改写之后
+        cur.height = Math.max(getHeight(cur.left), getHeight(cur.right)) + 1;
         return cur;
+    }
+
+    private int getHeight(Node cur){
+        if(cur == null)
+            return 0;
+        return cur.height;
     }
 
     public Boolean contains(K k){
@@ -85,7 +94,6 @@ public class BST <K extends Comparable<K>, V>{
         }
     }
 
-
     public K removeMax(){
         // 并没有利用 maximum, 去删除, 还是要删除, 因为要 parent
         K ret = maximum();
@@ -109,7 +117,7 @@ public class BST <K extends Comparable<K>, V>{
         return maximum(root);
     }
 
-    private K maximum(BST<K, V>.Node cur) {
+    private K maximum(AVLTree<K, V>.Node cur) {
         if(cur.right != null)
             return  maximum(cur.right);
         return cur.key;
@@ -155,6 +163,29 @@ public class BST <K extends Comparable<K>, V>{
 
         node.value = newValue;
     }
-   
+
+
+    private int getBalanceFactor(Node cur) {
+        if (cur == null)
+            return 0;
+        return getHeight(cur.left) - getHeight(cur.right);
+    }
+
+
+    public boolean isBalanced() {
+        return isBalanced(root);
+    }
     
+    // 判断以Node为根的二叉树是否是一棵平衡二叉树，递归算法
+    private boolean isBalanced (Node cur){
+        if(cur == null) 
+            return true;
+        int balanceFactor = getBalanceFactor(cur);
+        if(Math.abs(balanceFactor) > 1)
+            return false;
+        return isBalanced(cur.left)
+        && isBalanced(cur.right);
+    }
+    
+   
 }
