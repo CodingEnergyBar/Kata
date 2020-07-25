@@ -43,7 +43,7 @@ class Solution {
             }
         }
         Map<Integer, TreeSet<String>> idEmails = new HashMap<>();
-        // 整理外面
+        // 整理外面: id 更重要一些
         for(int i=0; i<size; i++){
              List<String> account = accounts.get(i);
              TreeSet<String> emails;
