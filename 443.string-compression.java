@@ -7,25 +7,25 @@
 // @lc code=start
 class Solution {
     public int compress(char[] chars) {
-        int[] arr = new int[26];
-        for(char c: chars){
-            arr[c-'a']+=1;
-        }
-        int p=0;
-        for(int i=0; i< 26; i++){
-            if(arr[i] == 0) continue;
-           
-            chars[p]= (char) ('a' + i);
-            p++;
-            if (arr[i] != 1){
-                char[] charArr = (arr[i] + "").toCharArray();
-                for(char c: charArr){
-                 chars[p] = c;
-                    p++ ;
+
+        int count = 0, pointer = -1;
+
+        for (int i = 0; i < chars.length; i++) {
+            count++;
+
+            if (i == chars.length - 1 || (chars[i] != chars[i + 1])) {
+                if (count == 1)
+                    chars[++pointer] = chars[i]; // Store only the character which has count 1
+                else {
+                    chars[++pointer] = chars[i]; // Store the character
+                    for (char ch : String.valueOf(count).toCharArray())
+                        chars[++pointer] = ch; // Store the count of the character
                 }
+                count = 0;
             }
         }
-        return p;
+
+        return ++pointer;
     }
 }
 // @lc code=end
