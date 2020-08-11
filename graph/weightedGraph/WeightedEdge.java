@@ -24,6 +24,9 @@ public class WeightedEdge implements Comparable<WeightedEdge>{
 
 	public int getV() {
 		return v;
-	}
+    }
+    public int getWeight(){
+        return weight;
+    }
 
 }

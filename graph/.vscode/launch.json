@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - Prim",
+            "request": "launch",
+            "mainClass": "weightedGraph.Prim",
+            "projectName": "graph_4f76bc5"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - Kruskal",
             "request": "launch",
             "mainClass": "weightedGraph.Kruskal",
