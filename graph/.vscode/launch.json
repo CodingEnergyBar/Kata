@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - DijkstraOp",
+            "request": "launch",
+            "mainClass": "weightedGraph.DijkstraOp",
+            "projectName": "graph_4f76bc5"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Dijkstra",
+            "request": "launch",
+            "mainClass": "weightedGraph.Dijkstra",
+            "projectName": "graph_4f76bc5"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - PrimPq",
             "request": "launch",
             "mainClass": "weightedGraph.PrimPq",
