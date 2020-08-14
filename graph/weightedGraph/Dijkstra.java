@@ -58,7 +58,7 @@ public class Dijkstra {
 
     public static void main(String[] args) {
         WeightedGraph g = new WeightedGraph("weighedGraph.txt");
-        DijkstraOp dijkstra = new DijkstraOp(g, 0);
+        DijkstraOpPath dijkstra = new DijkstraOpPath(g, 0);
         for(int v=0; v<g.V(); v++){
             System.out.println(dijkstra.distTo(v));
         }
