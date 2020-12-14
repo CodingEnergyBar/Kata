@@ -8,4 +8,6 @@ const has = set.has(3);
 
 // 求交集
 const set2 = new Set([2, 3]);
+// !!! set 转 array 再用filter
+// set 可以用array 初始化
 const set3 = new Set([...set].filter(item => set2.has(item)));
