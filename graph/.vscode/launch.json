@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - GraphBFS",
+            "request": "launch",
+            "mainClass": "directedGraph.GraphBFS",
+            "projectName": "graph_4f76bc5"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - GraphDFS",
+            "request": "launch",
+            "mainClass": "directedGraph.GraphDFS",
+            "projectName": "graph_4f76bc5"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - Graph",
             "request": "launch",
             "mainClass": "directedGraph.Graph",

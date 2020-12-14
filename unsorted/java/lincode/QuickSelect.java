@@ -39,8 +39,6 @@ public class QuickSelect {
         QuickSelect test = new QuickSelect();
 
 
-
-
         int []nums = new int[]{5,3,4,7,6};
         test.partition(nums, 0, nums.length-1);
 
