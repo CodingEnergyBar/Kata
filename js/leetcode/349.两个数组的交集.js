@@ -29,16 +29,17 @@ var intersection = function (nums1, nums2) {
         map.set(n1, true)
     }
     // in 是 key
-    console.log([...map.keys()].includes(2))
+    // console.log([...map.keys()].includes(2))
+    // has  
 
     for (const n2 of nums2) {
-        if (map.get(n2)) {
+        if (map.has(n2)) {
         // if([...map.keys()].includes(n2)){
             res.push(n2)
             map.delete(n2)
         }
     }
-    console.log(map)
+    // console.log(map)
     return res;
 };
 // @lc code=end

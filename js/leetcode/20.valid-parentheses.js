@@ -36,6 +36,7 @@ var isValid = function (s) {
     }
     return stack.length === 0;
 };
+// 空间复杂度 O1 常量级别的
 var isValid2 = function (s) {
     // 剪枝
     if (s.length % 2 === 1)
