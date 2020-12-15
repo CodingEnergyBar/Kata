@@ -4,5 +4,6 @@ const graph = {
     2: [0, 3],
     3: [3]
 };
+// 邻接表的表示法
 
 module.exports = graph;
