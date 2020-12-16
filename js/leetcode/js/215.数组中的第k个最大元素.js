@@ -1,10 +1,23 @@
+/*
+ * @lc app=leetcode.cn id=215 lang=javascript
+ *
+ * [215] 数组中的第K个最大元素
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number}
+ */
+
+
 class MinHeap {
 
     constructor() {
         this.heap = [];
     }
     swap(i1, i2) {
-        console.log(this.heap)
         const temp = this.heap[i1];
         this.heap[i1] = this.heap[i2];
         this.heap[i2] = temp;
@@ -34,7 +47,6 @@ class MinHeap {
         }
     }
     shiftDown(index) {
-        if (index === this.size()) return;
         const leftIndex = this.getLeftIndex(index);
         const rightIndex = this.getRightIndex(index);
         if (this.heap[leftIndex] < this.heap[index]) {
@@ -51,10 +63,8 @@ class MinHeap {
         this.shiftUp(this.heap.length - 1);
     }
     pop() {
-        const res = this.heap[0];
         this.heap[0] = this.heap.pop();
         this.shiftDown(0);
-
     }
     peek() {
         return this.heap[0];
@@ -63,12 +73,18 @@ class MinHeap {
         return this.heap.length;
     }
 }
-// 在react 源码内部 会有 event 被其他人使用的情况. 所以用箭头函数, 否则用class 比较好
 
-const h = new MinHeap();
-console.log("h", h)
-h.insert(3);
-h.insert(2);
-h.insert(1);
-h.pop();
-console.log(h.peek())
+// [3, 2, 1, 5, 6, 4]
+// 2
+var findKthLargest = function (nums, k) {
+    const minHeap = new MinHeap()
+    for (const num of nums) {
+        minHeap.insert(num);
+        if (minHeap.size() > k)
+            minHeap.pop()
+    }
+    return minHeap.peek()
+
+};
+// @lc code=end
+
