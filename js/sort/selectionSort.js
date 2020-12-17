@@ -1,3 +1,6 @@
+/**
+ * 找最小的 --> select 最小的饿
+ */
 Array.prototype.selectionSort = function () {
     // 还是需要 let
     //到最后一个的时候就不用了 
