@@ -12,7 +12,75 @@
 Array.prototype.peek = function () {
     return this[this.length - 1]
 }
-var calculate = function (s) {
+/**
+ * 前置的感觉
+ * 如果遇到了数字，由于可能是个多位数，所以我们要用while循环把之后的数字都读进来，然后用sign*num来更新结果res；
+ * 如果遇到了加号，则sign赋为1，如果遇到了符号，则赋为-1
+ * 如果遇到了左括号，
+ *  则把当前结果res和符号sign压入栈 压入栈的过程是两个还是一个，res重置为0，sign重置为1；
+ *  如果遇到了右括号，结果res乘以栈顶的符号，栈顶元素出栈，结果res加上栈顶的数字，
+ *  栈顶元素出栈。代码如下：
+ */
+const calculate = function (s) {
+    // Write your code here
+    s = s.replace(/\s+/g, '')
+    function isNumber(c) {
+        return c <= '9' && c >= '0'
+    }
+    let i = 0;
+    let num = 0; // 也是小备份 找到现在的书
+    let curRes = 0; // 备份 // 之前的结果站定g
+    let res = 0; //
+    let op = '+'; // 备份
+    let n = s.length
+
+    // 12+1
+    while (i < n) {
+        const c = s[i]
+        if (isNumber(c)) {
+            num = num * 10 + (c - '0') // num= 12
+        }
+        else if (c === '(') {
+            // findRightEnd
+            let cnt = 0, j = i;
+            // 在这里循环的是i
+            while (i < n) {
+                if (s[i] === '(') cnt++;
+                if (s[i] === ')') cnt--;
+                if (cnt === 0) break;
+                i++;
+            }
+            // s[i] == ')'
+            num += calculate(s.slice(j + 1, i))
+            // skip )
+            // i++;
+        }
+        if ('+/*-'.includes(c) || i === n - 1) {
+            switch (op) {
+                case '+':
+                    curRes += num; break;
+                case '-':
+                    curRes -= num; break;
+                case '*':
+                    curRes *= num; break;
+                case '/':
+                    curRes = Math.floor(curRes / num); break;
+            }
+            if (c === '+' || c === '-' || i === n - 1) {
+                res += curRes;
+                curRes = 0;
+            }
+            op = c;
+            num = 0;
+        }
+        i++;
+    }
+    return res;
+}
+
+
+
+var calculate3 = function (s) {
     s = s.replace(/\s+/gi, '')
     const n = s.length;
     const num = []
