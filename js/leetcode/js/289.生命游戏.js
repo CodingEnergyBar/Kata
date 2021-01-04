@@ -34,6 +34,7 @@ var gameOfLife = function (board) {
     const dirs = [[0, 1], [1, 0], [0, -1], [-1, 0],
     [1, 1], [1, -1], [-1, 1], [-1, -1]
     ]
+    Array
     for (let i = 0; i < board.length; i++) {
         for (let j = 0; j < board[0].length; j++) {
             let cur = board[i][j]
